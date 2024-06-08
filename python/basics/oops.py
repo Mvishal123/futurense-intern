@@ -76,3 +76,31 @@ triangle_area = my_triangle.get_area()
 triangle_perimeter = my_triangle.get_perimeter()
 print("Triangle Area:", triangle_area)
 print("Triangle Perimeter:", triangle_perimeter)
+
+
+
+
+# --------------------------------------------------------------
+
+# Inheritance
+
+class Animal:
+  def __init__(self, name):
+    self.name = name
+
+  def make_sound(self):
+    print("animal sound")
+
+class Dog(Animal):
+  def __init__(self, name, breed):
+    super().__init__(name)
+    self.breed = breed
+
+  def make_sound(self):
+    print("Woof! I am", self.breed)
+
+animal = Animal("Generic")
+animal.make_sound()
+
+dog = Dog("Fido", "Labrador")
+dog.make_sound()
