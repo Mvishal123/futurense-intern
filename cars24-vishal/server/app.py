@@ -5,6 +5,7 @@ from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 
 from routes.auth import auth_bp
+from routes.car import car_bp
 
 load_dotenv()
 
@@ -21,6 +22,7 @@ def home():
     return 'Welcome to the Car Dealership API!'
 
 app.register_blueprint(auth_bp, url_prefix='/auth')
+app.register_blueprint(car_bp, url_prefix='/car')
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -49,7 +49,7 @@ def login():
         return jsonify({'message': 'User does not exist'}), 404
     
     if bcrypt.check_password_hash(user.password, password):
-        access_token = create_access_token(identity=user.id)
+        access_token = create_access_token(identity=user.id, fresh=True)
         return jsonify({'access_token': access_token}), 200
     
     return jsonify({'message': 'Invalid credentials'}), 401

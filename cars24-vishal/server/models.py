@@ -24,6 +24,7 @@ class Car(db.Model):
     year = db.Column(db.Integer, nullable=False)
     mileage = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Numeric(10, 2), nullable=False)
+    sold = db.Column(db.Boolean, default=False)
     description = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
