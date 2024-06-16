@@ -256,11 +256,38 @@ print("Q6.4 - Zipped names and scores:", name_score_pairs)
 # unique_list = remove_duplicates(original_list)
 # print(unique_list) 
 
-def rotate_list(lst, n):
-    n = n % len(lst) 
-    return lst[-n:] + lst[:-n]
+# def rotate_list(lst, n):
+#     n = n % len(lst) 
+#     return lst[-n:] + lst[:-n]
 
 
-original_list = [1, 2, 3, 4, 5]
-rotated_list = rotate_list(original_list, 2)
-print(rotated_list) 
+# original_list = [1, 2, 3, 4, 5]
+# rotated_list = rotate_list(original_list, 2)
+# print(rotated_list) 
+
+
+def longest_increasing_subsequence(lst):
+    if not lst:
+        return []
+
+    lengths = [1] * len(lst)
+    previous = [-1] * len(lst)
+
+    for i in range(1, len(lst)):
+        for j in range(i):
+            if lst[i] > lst[j] and lengths[i] < lengths[j] + 1:
+                lengths[i] = lengths[j] + 1
+                previous[i] = j
+
+    max_length_index = lengths.index(max(lengths))
+    lis = []
+    while max_length_index != -1:
+        lis.append(lst[max_length_index])
+        max_length_index = previous[max_length_index]
+
+    return lis[::-1]
+
+
+original_list = [10, 22, 9, 33, 21, 50, 41, 60, 80]
+longest_subsequence = longest_increasing_subsequence(original_list)
+print(longest_subsequence) 
