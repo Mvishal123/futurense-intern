@@ -104,3 +104,89 @@ animal.make_sound()
 
 dog = Dog("Fido", "Labrador")
 dog.make_sound()
+
+
+
+# LIBRARY MANAGEMENT SYSTEM
+
+class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+        self.is_borrowed = False
+
+    def __str__(self):
+        return f"'{self.title}' by {self.author} {'(Borrowed)' if self.is_borrowed else '(Available)'}"
+
+
+class User:
+    def __init__(self, name):
+        self.name = name
+        self.borrowed_books = []
+
+    def borrow_book(self, book):
+        if not book.is_borrowed:
+            book.is_borrowed = True
+            self.borrowed_books.append(book)
+            print(f"{self.name} borrowed {book.title}")
+        else:
+            print(f"Sorry, {book.title} is already borrowed.")
+
+    def return_book(self, book):
+        if book in self.borrowed_books:
+            book.is_borrowed = False
+            self.borrowed_books.remove(book)
+            print(f"{self.name} returned {book.title}")
+        else:
+            print(f"{self.name} did not borrow {book.title}")
+
+    def __str__(self):
+        borrowed_titles = [book.title for book in self.borrowed_books]
+        return f"{self.name} has borrowed: {', '.join(borrowed_titles)}" if borrowed_titles else f"{self.name} has not borrowed any books."
+
+
+class Library:
+    def __init__(self):
+        self.books = []
+
+    def add_book(self, book):
+        self.books.append(book)
+        print(f"Added {book.title} to the library")
+
+    def display_books(self):
+        for book in self.books:
+            print(book)
+
+    def find_book(self, title):
+        for book in self.books:
+            if book.title == title:
+                return book
+        print(f"{title} not found in the library.")
+        return None
+
+library = Library()
+book1 = Book("1984", "George Orwell")
+book2 = Book("To Kill a Mockingbird", "Harper Lee")
+book3 = Book("The Great Gatsby", "F. Scott Fitzgerald")
+
+library.add_book(book1)
+library.add_book(book2)
+library.add_book(book3)
+
+library.display_books()
+
+user1 = User("Alice")
+user2 = User("Bob")
+
+user1.borrow_book(book1)
+user2.borrow_book(book1) 
+user2.borrow_book(book2)
+
+library.display_books()
+
+user1.return_book(book1)
+user2.borrow_book(book1)
+
+library.display_books()
+print(user1)
+print(user2)
