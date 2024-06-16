@@ -104,3 +104,14 @@ data = [
 
 grouped_by_city = group_by_key(data, 'city')
 print(grouped_by_city)
+
+
+
+
+def invert_dictionary(d):
+    inverted_dict = {value: key for key, value in d.items()}
+    return inverted_dict
+
+original_dict = {'a': 1, 'b': 2, 'c': 3}
+inverted_dict = invert_dictionary(original_dict)
+print(inverted_dict) 
