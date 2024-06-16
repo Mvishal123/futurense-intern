@@ -108,10 +108,27 @@ print(grouped_by_city)
 
 
 
-def invert_dictionary(d):
-    inverted_dict = {value: key for key, value in d.items()}
-    return inverted_dict
+# def invert_dictionary(d):
+#     inverted_dict = {value: key for key, value in d.items()}
+#     return inverted_dict
 
-original_dict = {'a': 1, 'b': 2, 'c': 3}
-inverted_dict = invert_dictionary(original_dict)
-print(inverted_dict) 
+# original_dict = {'a': 1, 'b': 2, 'c': 3}
+# inverted_dict = invert_dictionary(original_dict)
+# print(inverted_dict) 
+
+
+
+def group_anagrams(words):
+    anagrams = {}
+    for word in words:
+        sorted_word = ''.join(sorted(word))
+        if sorted_word in anagrams:
+            anagrams[sorted_word].append(word)
+        else:
+            anagrams[sorted_word] = [word]
+    return list(anagrams.values())
+
+
+words = ["eat", "tea", "tan", "ate", "nat", "bat"]
+anagram_groups = group_anagrams(words)
+print(anagram_groups) 
