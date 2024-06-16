@@ -240,3 +240,18 @@ names = ["Alice", "Bob", "Charlie"]
 scores = [95, 87, 92]
 name_score_pairs = list(zip(names, scores))
 print("Q6.4 - Zipped names and scores:", name_score_pairs)
+
+
+def remove_duplicates(lst):
+    seen = set()
+    unique_lst = []
+    for item in lst:
+        if item not in seen:
+            unique_lst.append(item)
+            seen.add(item)
+    return unique_lst
+
+
+original_list = [1, 2, 2, 3, 4, 4, 5]
+unique_list = remove_duplicates(original_list)
+print(unique_list) 
