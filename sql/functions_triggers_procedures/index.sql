@@ -215,3 +215,56 @@ DELIMITER ;
 
 CALL print_product_details();
 
+
+
+-- TRIGGERS
+
+-- Trigger Example 1: Audit Log for Insert Operations
+-- This trigger logs insert operations on the orders table into an orders_audit table.
+
+CREATE TABLE orders_audit (
+    audit_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    customer_name VARCHAR(50),
+    status VARCHAR(20),
+    operation VARCHAR(10),
+    operation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+DELIMITER $$
+CREATE TRIGGER after_order_insert
+AFTER INSERT ON orders
+FOR EACH ROW
+BEGIN
+    INSERT INTO orders_audit (order_id, customer_name, status, operation)
+    VALUES (NEW.order_id, NEW.customer_name, NEW.status, 'INSERT');
+END$$
+DELIMITER ;
+
+
+-- Trigger Example 2: Update Stock After Order
+-- This trigger updates the stock quantity in the products table after a new order is inserted into the order_products table.
+CREATE TABLE order_products (
+    order_product_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
+
+DELIMITER $$
+CREATE TRIGGER after_order_product_insert
+AFTER INSERT ON order_products
+FOR EACH ROW
+BEGIN
+    UPDATE products
+    SET quantity = quantity - NEW.quantity
+    WHERE product_id = NEW.product_id;
+END$$
+DELIMITER ;
+
+
+
