@@ -1,0 +1,2 @@
+Normalization is a database design technique that reduces data redundancy and ensures data integrity by organizing tables and columns into smaller, related tables. 
+The process of normalization involves dividing a database into two or more tables and defining relationships between them
